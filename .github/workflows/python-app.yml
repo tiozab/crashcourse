@@ -6,16 +6,6 @@ name: Python application
 on:
   workflow_dispatch:
 
-jobs:
-  build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-        matrix:
-            os: [ubuntu-latest, windows-latest, macos-latest]
-            python-version: [3.9, 3.10, 3.11, 3.12]
-
-
-on:
   push:
     branches: [ "main" ]
   pull_request:
@@ -24,10 +14,15 @@ on:
 permissions:
   contents: read
 
+
 jobs:
   build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+        matrix:
+            os: [ubuntu-latest, windows-latest, macos-latest]
+            python-version: [3.9, 3.10, 3.11, 3.12]
 
-    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
